@@ -102,7 +102,8 @@ def convertToG(maxScale, xAccl, yAccl, zAccl):
     Y = (2 * float(maxScale) * float(yAccl)) / (2 ** 16);
     Z = (2 * float(maxScale) * float(zAccl)) / (2 ** 16);
     return X, Y, Z
-
+    
+i=0    
 while True:
     # initialize LIS331 accelerometer
     mydev = bus.scan()
@@ -118,6 +119,12 @@ while True:
         LED_RED.off()
         alarm = False
     print(acc)
-    print(SW.value())
+    if i>=10:
+        if LED_GREEN.value()==1:
+            LED_GREEN.off()
+        else:
+            LED_GREEN.on()
+        i=0
+    i+=1
     
     time.sleep(0.1)
